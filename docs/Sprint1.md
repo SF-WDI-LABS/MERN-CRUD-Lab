@@ -65,20 +65,25 @@ We also need a basic Comment component with an Author and some stylized text:
 //Comment.js
 import React, { Component } from 'react';
 import style from './style';
+import marked from 'marked';
 
 class Comment extends Component {
-
+  rawMarkup() {
+    let rawMarkup = marked(this.props.children);
+    return { __html: rawMarkup };
+  }
   render() {
     return (
       <div style={ style.comment }>
         <h3>{this.props.author}</h3>
-        <span >{this.props.children}</span>
+        <span dangerouslySetInnerHTML={ this.rawMarkup() } />
       </div>
     )
   }
 }
 
 export default Comment;
+
 ```
 
 And finally, we definitely need a form for POSTing:
