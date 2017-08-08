@@ -65,21 +65,17 @@ We also need a basic Comment component with an Author and some stylized text:
 //Comment.js
 import React, { Component } from 'react';
 import style from './style';
-import marked from 'marked';
 
 class Comment extends Component {
-  rawMarkup() {
-    let rawMarkup = marked(this.props.children.toString());
-    return { __html: rawMarkup };
-  }
-  render() {
-    return (
-      <div style={ style.comment }>
-        <h3>{this.props.author}</h3>
-        <span dangerouslySetInnerHTML={ this.rawMarkup() } />
-      </div>
-    )
-  }
+
+render() {
+  return (
+    <div style={ style.comment }>
+      <h3>{this.props.author}</h3>
+      <span >{this.props.children}</span>
+    </div>
+  )
+}
 }
 
 export default Comment;
